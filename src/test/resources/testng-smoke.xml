@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  testng-smoke.xml – Fast smoke suite for post-deployment sanity checks.
+  Run: mvn test -Psmoke
+-->
+<suite name="Final Rental – Smoke Suite" verbose="1" parallel="false">
+
+    <listeners>
+        <listener class-name="com.finalrental.listeners.ExtentReportListener"/>
+    </listeners>
+
+    <test name="Smoke Tests">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.finalrental.tests.HomePageTest"/>
+            <class name="com.finalrental.tests.SearchResultsTest"/>
+            <class name="com.finalrental.tests.PricingCalculationTest"/>
+            <class name="com.finalrental.tests.BookingFlowTest"/>
+            <class name="com.finalrental.tests.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>

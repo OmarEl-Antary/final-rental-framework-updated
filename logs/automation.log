@@ -1,0 +1,297 @@
+2026-06-22 14:52:52.569 [main] INFO  com.finalrental.config.ConfigReader – Loaded configuration from: src/test/resources/config.properties
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest –   Final Rental – E2E Test Suite Starting
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest –   Environment : qa
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest –   Base URL    : https://testing.final.sa
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest –   Browser     : chrome
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest –   Headless    : false
+2026-06-22 14:52:52.817 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 14:52:52.874 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.fullPhoneOtpLoginFlow
+2026-06-22 14:52:52.876 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:52:55.448 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:52:55.489 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 14:52:55.489 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 14:53:22.938 [main] WARN  com.finalrental.tests.LoginOtpTest – ⚠ SKIPPED: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 14:53:23.336 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:53:23.336 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 14:53:23.345 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupCanBeClosed
+2026-06-22 14:53:23.346 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:53:24.639 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:53:24.643 [main] WARN  com.finalrental.tests.LoginOtpTest – ⚠ SKIPPED: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 14:53:24.911 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:53:24.912 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 14:53:24.914 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupOpensSuccessfully
+2026-06-22 14:53:24.914 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:53:26.132 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:53:26.137 [main] WARN  com.finalrental.tests.LoginOtpTest – ⚠ SKIPPED: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 14:53:26.399 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:53:26.400 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 14:53:26.404 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.sendOtpShowsOtpInputFields
+2026-06-22 14:53:26.404 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:53:27.713 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:53:27.715 [main] WARN  com.finalrental.tests.LoginOtpTest – ⚠ SKIPPED: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 14:53:27.928 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:53:27.928 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 14:55:39.541 [main] INFO  com.finalrental.config.ConfigReader – Loaded configuration from: src/test/resources/config.properties
+2026-06-22 14:55:39.771 [main] INFO  com.finalrental.tests.LoginTest – ========================================================
+2026-06-22 14:55:39.771 [main] INFO  com.finalrental.tests.LoginTest –   Final Rental – E2E Test Suite Starting
+2026-06-22 14:55:39.772 [main] INFO  com.finalrental.tests.LoginTest –   Environment : qa
+2026-06-22 14:55:39.772 [main] INFO  com.finalrental.tests.LoginTest –   Base URL    : https://testing.final.sa
+2026-06-22 14:55:39.772 [main] INFO  com.finalrental.tests.LoginTest –   Browser     : chrome
+2026-06-22 14:55:39.773 [main] INFO  com.finalrental.tests.LoginTest –   Headless    : false
+2026-06-22 14:55:39.773 [main] INFO  com.finalrental.tests.LoginTest – ========================================================
+2026-06-22 14:55:39.832 [main] INFO  com.finalrental.tests.LoginTest – ▶ Starting test: LoginTest.loginPageRegisterLinkNavigatesToRegister
+2026-06-22 14:55:39.834 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:55:42.307 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:55:42.342 [main] INFO  com.finalrental.pages.LoginPage – Navigating to: https://testing.final.sa/login
+2026-06-22 14:56:12.415 [main] WARN  com.finalrental.tests.LoginTest – ⚠ SKIPPED: LoginTest_loginPageRegisterLinkNavigatesToRegister
+2026-06-22 14:56:12.732 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:56:12.732 [main] INFO  com.finalrental.tests.LoginTest – ◀ Test completed: LoginTest_loginPageRegisterLinkNavigatesToRegister
+2026-06-22 14:57:31.623 [main] INFO  com.finalrental.config.ConfigReader – Loaded configuration from: src/test/resources/config.properties
+2026-06-22 14:57:31.804 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 14:57:31.805 [main] INFO  com.finalrental.tests.LoginOtpTest –   Final Rental – E2E Test Suite Starting
+2026-06-22 14:57:31.805 [main] INFO  com.finalrental.tests.LoginOtpTest –   Environment : qa
+2026-06-22 14:57:31.805 [main] INFO  com.finalrental.tests.LoginOtpTest –   Base URL    : https://testing.final.sa
+2026-06-22 14:57:31.806 [main] INFO  com.finalrental.tests.LoginOtpTest –   Browser     : chrome
+2026-06-22 14:57:31.806 [main] INFO  com.finalrental.tests.LoginOtpTest –   Headless    : false
+2026-06-22 14:57:31.806 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 14:57:31.881 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.fullPhoneOtpLoginFlow
+2026-06-22 14:57:31.884 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:57:34.663 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:57:34.715 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 14:57:34.715 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 14:57:44.650 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 14:57:44.664 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 14:57:45.234 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code: +20
+2026-06-22 14:58:00.281 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 14:58:00.629 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_145800_282.png
+2026-06-22 14:58:00.629 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_145800_282.png
+2026-06-22 14:58:01.074 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:58:01.074 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 14:58:01.081 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupCanBeClosed
+2026-06-22 14:58:01.082 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:58:02.645 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:58:02.648 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 14:58:02.649 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 14:58:15.815 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 14:58:15.818 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 14:58:16.641 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 14:58:16.960 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_145816_642.png
+2026-06-22 14:58:16.960 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_145816_642.png
+2026-06-22 14:58:17.233 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:58:17.234 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 14:58:17.235 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupOpensSuccessfully
+2026-06-22 14:58:17.236 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:58:18.548 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:58:18.550 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 14:58:18.551 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 14:58:29.993 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 14:58:29.997 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 14:58:31.496 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 14:58:31.701 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupOpensSuccessfully_20260622_145831_496.png
+2026-06-22 14:58:31.701 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupOpensSuccessfully_20260622_145831_496.png
+2026-06-22 14:58:31.996 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:58:31.997 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 14:58:32.002 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.sendOtpShowsOtpInputFields
+2026-06-22 14:58:32.002 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 14:58:32.929 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 14:58:32.932 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 14:58:32.932 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 14:58:50.180 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 14:58:50.182 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 14:58:50.747 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code: +20
+2026-06-22 14:59:06.131 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 14:59:06.309 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_sendOtpShowsOtpInputFields_20260622_145906_132.png
+2026-06-22 14:59:06.309 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_sendOtpShowsOtpInputFields_20260622_145906_132.png
+2026-06-22 14:59:06.655 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 14:59:06.656 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 15:03:24.576 [main] INFO  com.finalrental.config.ConfigReader – Loaded configuration from: src/test/resources/config.properties
+2026-06-22 15:03:24.795 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 15:03:24.795 [main] INFO  com.finalrental.tests.LoginOtpTest –   Final Rental – E2E Test Suite Starting
+2026-06-22 15:03:24.796 [main] INFO  com.finalrental.tests.LoginOtpTest –   Environment : qa
+2026-06-22 15:03:24.796 [main] INFO  com.finalrental.tests.LoginOtpTest –   Base URL    : https://testing.final.sa
+2026-06-22 15:03:24.796 [main] INFO  com.finalrental.tests.LoginOtpTest –   Browser     : chrome
+2026-06-22 15:03:24.796 [main] INFO  com.finalrental.tests.LoginOtpTest –   Headless    : false
+2026-06-22 15:03:24.796 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 15:03:24.862 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.fullPhoneOtpLoginFlow
+2026-06-22 15:03:24.865 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:03:29.283 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:03:29.320 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:03:29.320 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:03:50.872 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:03:50.895 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:03:50.911 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:03:51.241 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code: +20
+2026-06-22 15:03:51.258 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:04:06.696 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 15:04:06.877 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_150406_699.png
+2026-06-22 15:04:06.877 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_150406_699.png
+2026-06-22 15:04:07.347 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:04:07.347 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 15:04:07.355 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupCanBeClosed
+2026-06-22 15:04:07.355 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:04:08.564 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:04:08.566 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:04:08.567 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:04:36.600 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:04:36.603 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:04:36.619 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:04:38.077 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 15:04:38.211 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_150438_077.png
+2026-06-22 15:04:38.212 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_150438_077.png
+2026-06-22 15:04:38.504 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:04:38.504 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 15:04:38.507 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupOpensSuccessfully
+2026-06-22 15:04:38.507 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:04:39.713 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:04:39.716 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:04:39.717 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:04:57.951 [main] WARN  com.finalrental.tests.LoginOtpTest – ⚠ SKIPPED: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 15:04:58.052 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:04:58.052 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 15:04:58.055 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.sendOtpShowsOtpInputFields
+2026-06-22 15:04:58.056 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:04:59.027 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:04:59.030 [main] WARN  com.finalrental.tests.LoginOtpTest – ⚠ SKIPPED: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 15:04:59.223 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:04:59.224 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 15:26:43.331 [main] INFO  com.finalrental.config.ConfigReader – Loaded configuration from: src/test/resources/config.properties
+2026-06-22 15:26:43.588 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 15:26:43.588 [main] INFO  com.finalrental.tests.LoginOtpTest –   Final Rental – E2E Test Suite Starting
+2026-06-22 15:26:43.589 [main] INFO  com.finalrental.tests.LoginOtpTest –   Environment : qa
+2026-06-22 15:26:43.589 [main] INFO  com.finalrental.tests.LoginOtpTest –   Base URL    : https://testing.final.sa
+2026-06-22 15:26:43.589 [main] INFO  com.finalrental.tests.LoginOtpTest –   Browser     : chrome
+2026-06-22 15:26:43.589 [main] INFO  com.finalrental.tests.LoginOtpTest –   Headless    : false
+2026-06-22 15:26:43.589 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 15:26:43.678 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.fullPhoneOtpLoginFlow
+2026-06-22 15:26:43.680 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:26:45.906 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:26:45.938 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:26:45.938 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:26:53.438 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:26:53.484 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:26:53.486 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:26:53.510 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:26:53.944 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code by visible text via JS: +20
+2026-06-22 15:26:54.216 [main] INFO  com.finalrental.pages.LoginOtpPage – Entering phone number: 1020416304
+2026-06-22 15:26:54.760 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking Send OTP button (#custom-checkphone)
+2026-06-22 15:26:55.489 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 15:26:55.780 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_152655_492.png
+2026-06-22 15:26:55.780 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_152655_492.png
+2026-06-22 15:26:56.070 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:26:56.071 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 15:26:56.075 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupCanBeClosed
+2026-06-22 15:26:56.076 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:26:57.301 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:26:57.304 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:26:57.304 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:27:15.756 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:27:15.784 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:27:15.785 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:27:15.809 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:27:16.286 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 15:27:16.570 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_152716_286.png
+2026-06-22 15:27:16.571 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_152716_286.png
+2026-06-22 15:27:16.881 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:27:16.882 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 15:27:16.885 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupOpensSuccessfully
+2026-06-22 15:27:16.885 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:27:18.060 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:27:18.063 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:27:18.064 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:27:24.383 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:27:24.460 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:27:24.465 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:27:24.542 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:27:25.233 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 15:27:25.616 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupOpensSuccessfully_20260622_152725_234.png
+2026-06-22 15:27:25.618 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupOpensSuccessfully_20260622_152725_234.png
+2026-06-22 15:27:25.955 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:27:25.956 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 15:27:25.959 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.sendOtpShowsOtpInputFields
+2026-06-22 15:27:25.959 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:27:26.999 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:27:27.003 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:27:27.004 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:27:34.867 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:27:34.901 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:27:34.903 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:27:34.935 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:27:35.363 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code by visible text via JS: +20
+2026-06-22 15:27:35.538 [main] INFO  com.finalrental.pages.LoginOtpPage – Entering phone number: 1020416304
+2026-06-22 15:27:36.142 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking Send OTP button (#custom-checkphone)
+2026-06-22 15:27:36.930 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 15:27:37.268 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_sendOtpShowsOtpInputFields_20260622_152736_931.png
+2026-06-22 15:27:37.269 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_sendOtpShowsOtpInputFields_20260622_152736_931.png
+2026-06-22 15:27:37.545 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:27:37.546 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 15:30:27.059 [main] INFO  com.finalrental.config.ConfigReader – Loaded configuration from: src/test/resources/config.properties
+2026-06-22 15:30:27.405 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 15:30:27.405 [main] INFO  com.finalrental.tests.LoginOtpTest –   Final Rental – E2E Test Suite Starting
+2026-06-22 15:30:27.406 [main] INFO  com.finalrental.tests.LoginOtpTest –   Environment : qa
+2026-06-22 15:30:27.406 [main] INFO  com.finalrental.tests.LoginOtpTest –   Base URL    : https://testing.final.sa
+2026-06-22 15:30:27.407 [main] INFO  com.finalrental.tests.LoginOtpTest –   Browser     : chrome
+2026-06-22 15:30:27.407 [main] INFO  com.finalrental.tests.LoginOtpTest –   Headless    : false
+2026-06-22 15:30:27.407 [main] INFO  com.finalrental.tests.LoginOtpTest – ========================================================
+2026-06-22 15:30:27.489 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.fullPhoneOtpLoginFlow
+2026-06-22 15:30:27.492 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:30:30.102 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:30:30.127 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:30:30.128 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:30:38.205 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:30:38.261 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:30:38.265 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:30:38.308 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:30:38.828 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code by visible text via JS: +20
+2026-06-22 15:30:39.040 [main] INFO  com.finalrental.pages.LoginOtpPage – Entering phone number: 1020416304
+2026-06-22 15:30:39.621 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking Send OTP button (#custom-checkphone)
+2026-06-22 15:30:40.380 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 15:30:40.673 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_153040_382.png
+2026-06-22 15:30:40.674 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_fullPhoneOtpLoginFlow_20260622_153040_382.png
+2026-06-22 15:30:41.000 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:30:41.000 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_fullPhoneOtpLoginFlow
+2026-06-22 15:30:41.004 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupCanBeClosed
+2026-06-22 15:30:41.004 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:30:42.200 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:30:42.202 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:30:42.202 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:30:50.240 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:30:50.278 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:30:50.279 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:30:50.314 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:30:50.901 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 15:30:51.213 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_153050_902.png
+2026-06-22 15:30:51.214 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupCanBeClosed_20260622_153050_902.png
+2026-06-22 15:30:51.521 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:30:51.522 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupCanBeClosed
+2026-06-22 15:30:51.524 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.loginPopupOpensSuccessfully
+2026-06-22 15:30:51.525 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:30:52.668 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:30:52.672 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:30:52.673 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:31:00.914 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:31:00.949 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:31:00.951 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:31:00.980 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:31:01.528 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 15:31:01.787 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupOpensSuccessfully_20260622_153101_529.png
+2026-06-22 15:31:01.788 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_loginPopupOpensSuccessfully_20260622_153101_529.png
+2026-06-22 15:31:02.055 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:31:02.056 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_loginPopupOpensSuccessfully
+2026-06-22 15:31:02.060 [main] INFO  com.finalrental.tests.LoginOtpTest – ▶ Starting test: LoginOtpTest.sendOtpShowsOtpInputFields
+2026-06-22 15:31:02.060 [main] INFO  com.finalrental.config.DriverFactory – Initialising chrome driver | headless=false
+2026-06-22 15:31:03.032 [main] INFO  com.finalrental.config.DriverFactory – WebDriver ready: ChromeDriver
+2026-06-22 15:31:03.034 [main] INFO  com.finalrental.pages.HomePage – Opening Final Rental home page: https://testing.final.sa
+2026-06-22 15:31:03.034 [main] INFO  com.finalrental.pages.HomePage – Navigating to: https://testing.final.sa
+2026-06-22 15:31:12.287 [main] INFO  com.finalrental.pages.HomePage – Home page loaded successfully.
+2026-06-22 15:31:12.327 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicked body to dismiss any open banner.
+2026-06-22 15:31:12.328 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking header login button (#custom-login1)
+2026-06-22 15:31:12.366 [main] INFO  com.finalrental.pages.LoginOtpPage – Closed any open modal/popup via JS.
+2026-06-22 15:31:12.917 [main] INFO  com.finalrental.pages.LoginOtpPage – Selecting country code by visible text via JS: +20
+2026-06-22 15:31:13.117 [main] INFO  com.finalrental.pages.LoginOtpPage – Entering phone number: 1020416304
+2026-06-22 15:31:13.810 [main] INFO  com.finalrental.pages.LoginOtpPage – Clicking Send OTP button (#custom-checkphone)
+2026-06-22 15:31:14.482 [main] ERROR com.finalrental.tests.LoginOtpTest – ✗ FAILED: LoginOtpTest_sendOtpShowsOtpInputFields
+2026-06-22 15:31:14.778 [main] INFO  com.finalrental.utils.ScreenshotUtil – Screenshot saved: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_sendOtpShowsOtpInputFields_20260622_153114_483.png
+2026-06-22 15:31:14.779 [main] INFO  com.finalrental.tests.LoginOtpTest –   Screenshot: C:\Users\omar.osama\Downloads\final-rental-automation-framework (1)\final-rental-framework-updated\src\test\resources\screenshots\LoginOtpTest_sendOtpShowsOtpInputFields_20260622_153114_483.png
+2026-06-22 15:31:15.114 [main] INFO  com.finalrental.config.DriverFactory – WebDriver quit successfully.
+2026-06-22 15:31:15.115 [main] INFO  com.finalrental.tests.LoginOtpTest – ◀ Test completed: LoginOtpTest_sendOtpShowsOtpInputFields
