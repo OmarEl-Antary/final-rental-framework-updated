@@ -1,8 +1,11 @@
 package com.finalrental.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
 import java.util.List;
 
 public class LoginOtpPage extends BasePage {
@@ -25,11 +28,16 @@ public class LoginOtpPage extends BasePage {
     @FindBy(id = "custom-verify")
     private WebElement verifyButton;
 
+    @FindBy(id = "custom-resend")
+    private WebElement resendButton;
+
     @FindBy(id = "custom-close2")
     private WebElement closePopupButton2;
 
     @FindBy(id = "custom-close3")
     private WebElement closePopupButton3;
+
+    // ── Dismiss banner ────────────────────────────────────────────────────────
 
     public LoginOtpPage dismissBanner() {
         try {
@@ -41,23 +49,27 @@ public class LoginOtpPage extends BasePage {
         return this;
     }
 
+    // ── Close any blocking modal ──────────────────────────────────────────────
+
     private void closeAnyOpenModal() {
         try {
             executeScript(
-                    "document.querySelectorAll('.modal').forEach(m => { " +
-                            "  m.classList.remove('show'); " +
-                            "  m.style.display = 'none'; " +
+                    "document.querySelectorAll('.modal').forEach(m => {" +
+                            "  m.classList.remove('show');" +
+                            "  m.style.display = 'none';" +
                             "});" +
                             "document.querySelectorAll('.modal-backdrop').forEach(b => b.remove());" +
                             "document.body.classList.remove('modal-open');" +
                             "document.body.style.overflow = '';" +
                             "document.body.style.paddingRight = '';"
             );
-            log.info("Closed any open modal/popup via JS.");
+            log.info("Closed any open modal via JS.");
         } catch (Exception e) {
-            log.debug("No modal to close or JS execution failed: {}", e.getMessage());
+            log.debug("No modal to close: {}", e.getMessage());
         }
     }
+
+    // ── Step 1: Click login button ────────────────────────────────────────────
 
     public LoginOtpPage clickLoginButton() {
         log.info("Clicking header login button (#custom-login1)");
@@ -66,35 +78,35 @@ public class LoginOtpPage extends BasePage {
         return this;
     }
 
-    public LoginOtpPage selectCountryCodeByValue(String value) {
-        log.info("Selecting country code by value via JS: {}", value);
-        waitForPresence(org.openqa.selenium.By.id("country-code-register"));
-        executeScript(
-                "var el = arguments[0];" +
-                        "el.value = arguments[1];" +
-                        "el.dispatchEvent(new Event('change', { bubbles: true }));",
-                countryCodeSelect, value
-        );
+    // ── Step 2: Select country code ───────────────────────────────────────────
+
+    public LoginOtpPage selectCountryCodeByText(String visibleText) {
+        log.info("Selecting country code: {}", visibleText);
+        try {
+            // فتح الـ Bootstrap selectpicker dropdown
+            executeScript(
+                    "var btn = document.querySelector(" +
+                            "'button[data-id=\"country-code-register\"]');" +
+                            "if(btn) btn.click();"
+            );
+            // اختيار الـ option المطلوب
+            executeScript(
+                    "var items = document.querySelectorAll(" +
+                            "'.dropdown-menu li a span.text');" +
+                            "for(var i=0; i<items.length; i++){" +
+                            "  if(items[i].textContent.includes(arguments[0])){" +
+                            "    items[i].click(); break;" +
+                            "  }" +
+                            "}", visibleText
+            );
+            log.info("Country code selected.");
+        } catch (Exception e) {
+            log.warn("Could not select country code: {}", e.getMessage());
+        }
         return this;
     }
 
-    public LoginOtpPage selectCountryCodeByText(String visibleText) {
-        log.info("Selecting country code by visible text via JS: {}", visibleText);
-        waitForPresence(org.openqa.selenium.By.id("country-code-register"));
-        executeScript(
-                "var el = arguments[0];" +
-                        "var text = arguments[1];" +
-                        "for (var i = 0; i < el.options.length; i++) {" +
-                        "  if (el.options[i].text.trim() === text.trim() || el.options[i].text.includes(text)) {" +
-                        "    el.value = el.options[i].value;" +
-                        "    el.dispatchEvent(new Event('change', { bubbles: true }));" +
-                        "    break;" +
-                        "  }" +
-                        "}",
-                countryCodeSelect, visibleText
-        );
-        return this;
-    }
+    // ── Step 3: Enter phone number ────────────────────────────────────────────
 
     public LoginOtpPage enterPhoneNumber(String phoneNumber) {
         log.info("Entering phone number: {}", phoneNumber);
@@ -102,62 +114,86 @@ public class LoginOtpPage extends BasePage {
         return this;
     }
 
+    // ── Step 4: Click Send OTP ────────────────────────────────────────────────
+
     public LoginOtpPage clickSendOtp() {
         log.info("Clicking Send OTP button (#custom-checkphone)");
         click(sendOtpButton);
+
+        // استنى لحد ما الـ OTP popup يفتح (max 20 ثانية)
+        log.info("Waiting for OTP popup to appear...");
+        try {
+            new org.openqa.selenium.support.ui.WebDriverWait(
+                    driver, Duration.ofSeconds(20))
+                    .until(ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector(".code_shapes__, input.code-input")));
+            log.info("OTP popup appeared successfully.");
+        } catch (Exception e) {
+            log.warn("OTP popup did not appear: {}", e.getMessage());
+        }
         return this;
     }
+
+    // ── Step 5: Enter OTP ─────────────────────────────────────────────────────
 
     public LoginOtpPage enterOtp(String otpCode) {
-        log.info("Entering OTP code: {}", otpCode);
+        log.info("Entering OTP: {}", otpCode);
 
-        if (otpCode.length() != otpInputs.size()) {
-            log.warn("OTP code length ({}) does not match number of OTP input fields ({})",
-                    otpCode.length(), otpInputs.size());
-        }
+        // استنى لحد ما الخانات تبقى clickable
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.cssSelector("input.code-input")));
 
-        for (int i = 0; i < otpCode.length() && i < otpInputs.size(); i++) {
-            WebElement digitInput = otpInputs.get(i);
-            String digit = String.valueOf(otpCode.charAt(i));
-            waitForVisible(digitInput);
-            digitInput.clear();
-            digitInput.sendKeys(digit);
+        List<WebElement> inputs = driver.findElements(
+                By.cssSelector("input.code-input"));
+
+        for (int i = 0; i < otpCode.length() && i < inputs.size(); i++) {
+            inputs.get(i).clear();
+            inputs.get(i).sendKeys(String.valueOf(otpCode.charAt(i)));
         }
+        log.info("OTP entered successfully.");
         return this;
     }
 
-    public int getOtpInputCount() {
-        return otpInputs.size();
-    }
+    // ── Step 6: Verify ────────────────────────────────────────────────────────
 
     public void clickVerify() {
         log.info("Clicking Verify button (#custom-verify)");
         click(verifyButton);
     }
 
+    // ── Close popup ───────────────────────────────────────────────────────────
+
     public void closePopup() {
-        log.info("Closing login popup (#custom-close2)");
+        log.info("Closing popup");
         try {
             click(closePopupButton2);
         } catch (Exception e) {
-            log.debug("#custom-close2 not clickable, trying #custom-close3 instead.");
             click(closePopupButton3);
         }
     }
 
+    // ── State checks ──────────────────────────────────────────────────────────
+
     public boolean isLoginPopupOpen() {
-        return isElementVisible(phoneInput);
+        return isElementPresent(By.id("phone-register")) &&
+                isElementVisible(phoneInput);
     }
 
     public boolean isOtpStepVisible() {
-        return !otpInputs.isEmpty() && isElementVisible(otpInputs.get(0));
-    }
-
-    public boolean isSendOtpButtonEnabled() {
-        return isElementEnabled(sendOtpButton);
+        try {
+            List<WebElement> inputs = driver.findElements(
+                    By.cssSelector("input.code-input"));
+            return !inputs.isEmpty() && inputs.get(0).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isVerifyButtonEnabled() {
         return isElementEnabled(verifyButton);
+    }
+
+    public int getOtpInputCount() {
+        return driver.findElements(By.cssSelector("input.code-input")).size();
     }
 }

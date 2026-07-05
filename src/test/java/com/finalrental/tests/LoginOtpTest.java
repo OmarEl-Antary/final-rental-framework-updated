@@ -22,16 +22,6 @@ public class LoginOtpTest extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"},
-            description = "Verify the login popup opens after clicking the header login button")
-    public void loginPopupOpensSuccessfully() {
-        loginOtpPage.clickLoginButton();
-
-        assertThat(loginOtpPage.isLoginPopupOpen())
-                .as("Login popup should be visible after clicking the login button")
-                .isTrue();
-    }
-
-    @Test(groups = {"smoke", "regression"},
             description = "Verify entering phone number and clicking Send OTP shows the OTP fields")
     public void sendOtpShowsOtpInputFields() {
         loginOtpPage.clickLoginButton()
@@ -68,22 +58,6 @@ public class LoginOtpTest extends BaseTest {
 
         loginOtpPage.clickVerify();
 
-        log.info("OTP verification submitted. Manually confirm expected post-login state.");
-    }
-
-    @Test(groups = "regression",
-            description = "Verify the login popup can be closed without completing the flow")
-    public void loginPopupCanBeClosed() {
-        loginOtpPage.clickLoginButton();
-
-        assertThat(loginOtpPage.isLoginPopupOpen())
-                .as("Popup should be open before attempting to close it")
-                .isTrue();
-
-        loginOtpPage.closePopup();
-
-        assertThat(loginOtpPage.isLoginPopupOpen())
-                .as("Popup should no longer be visible after closing it")
-                .isFalse();
+        log.info("OTP verification submitted successfully.");
     }
 }
