@@ -6,7 +6,6 @@ import org.testng.Assert;
 
 public class OrderSteps {
 
-    private HomePage homePage;
     private ProductsPage productsPage;
     private CartPage cartPage;
     private OrderConfirmationPage confirmPage;

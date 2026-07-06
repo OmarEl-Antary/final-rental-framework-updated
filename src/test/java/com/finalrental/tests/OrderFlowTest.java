@@ -101,6 +101,10 @@ public class OrderFlowTest extends BaseTest {
 
         log.info("=== Step 10: فتح تفاصيل الطلب ===");
         OrdersPage ordersPage = new OrdersPage();
+
+// استنى لحد ما الطلبات تتحمل
+        try { Thread.sleep(3000); } catch (Exception e) {}
+
         assertThat(ordersPage.isOrdersPageLoaded())
                 .as("يجب أن تظهر قائمة الطلبات")
                 .isTrue();

@@ -17,9 +17,9 @@ Feature: Full Order Flow
     When the user navigates to cart page
     Then the cart page should be loaded
 
-    When the user selects pickup date "2026-07-07"
+    When the user selects pickup date "2026-07-08"
     And selects pickup time "7:00"
-    And selects return date "2026-07-10"
+    And selects return date "2026-07-11"
     And selects return time "7:00"
     And submits the cart
 
