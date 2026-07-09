@@ -98,6 +98,8 @@ public final class DriverFactory {
     private static WebDriver createChromeDriver(boolean headless) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
         if (headless) options.addArguments("--headless=new");
         options.addArguments(
             "--no-sandbox",

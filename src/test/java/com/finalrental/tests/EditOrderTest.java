@@ -14,8 +14,7 @@ public class EditOrderTest extends BaseTest {
         LoginOtpPage loginOtpPage = new LoginOtpPage().dismissBanner();
         loginOtpPage.clickLoginButton()
                 .selectCountryCodeByText("+20")
-                .enterPhoneNumber("1020416304")
-                .clickSendOtp()
+                .enterPhoneNumber(com.finalrental.data.TestContext.getRegisteredPhone())                .clickSendOtp()
                 .enterOtp("1111")
                 .clickVerify();
         log.info("✔ تم تسجيل الدخول بنجاح");

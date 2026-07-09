@@ -1,6 +1,8 @@
 # Final Rental – E2E Test Automation Framework
 
-A production-grade Selenium + TestNG automation framework for the **Final Rental** website, built with the **Page Object Model (POM) + Page Factory** pattern.
+A production-grade **Selenium + TestNG + Cucumber BDD** automation framework for the **Final Rental** website ([testing.final.sa](https://testing.final.sa)), built with the **Page Object Model (POM) + Page Factory** pattern.
+
+🔗 **GitHub:** [OmarEl-Antary/final-rental-framework-updated](https://github.com/OmarEl-Antary/final-rental-framework-updated)
 
 ---
 
@@ -8,77 +10,145 @@ A production-grade Selenium + TestNG automation framework for the **Final Rental
 
 | Layer | Technology |
 |---|---|
-| Language | Java 21 |
-| Browser Automation | Selenium WebDriver 4.x |
-| Test Runner | TestNG 7.x |
+| Language | Java 21 LTS |
+| Browser Automation | Selenium WebDriver 4.18.1 |
+| Test Runner | TestNG 7.9 |
+| BDD Framework | Cucumber 7.15.0 |
 | Build Tool | Maven 3.8+ |
 | Design Pattern | Page Object Model + Page Factory |
-| Driver Management | WebDriverManager (auto) |
 | Reporting | Extent Reports (Spark) |
-| Logging | Log4j2 |
+| Logging | Log4j2 + SLF4J |
 | Assertions | AssertJ (fluent) |
-| Test Data | JavaFaker + JSON files |
+| Pricing Validation | BigDecimal (exact arithmetic) |
+
+> ⚠️ **Java 21 is required.** Java 24+ causes `ExceptionInInitializerError` with the Selenium/TestNG versions used here.
 
 ---
 
 ## Project Structure
 
 ```
-final-rental-framework/
+final-rental-framework-updated/
 │
-├── pom.xml                                    # Maven dependencies & profiles
+├── pom.xml
 │
 ├── src/
 │   ├── main/java/com/finalrental/
 │   │   ├── config/
-│   │   │   ├── ConfigReader.java              # Singleton config loader (config.properties)
-│   │   │   └── DriverFactory.java             # Thread-safe WebDriver factory (ThreadLocal)
-│   │   │
-│   │   ├── models/
-│   │   │   ├── RentalCalculator.java          # Business logic: pricing & tax calculations
-│   │   │   └── RentalSearchRequest.java       # Immutable search request POJO (Builder pattern)
+│   │   │   ├── ConfigReader.java           # Singleton config loader
+│   │   │   └── DriverFactory.java          # WebDriver factory
 │   │   │
 │   │   ├── pages/
-│   │   │   ├── BasePage.java                  # Parent page: all Selenium utilities + explicit waits
-│   │   │   ├── HomePage.java                  # Landing page + search form
-│   │   │   ├── SearchResultsPage.java         # Car listing + filters + sorting
-│   │   │   ├── CarDetailPage.java             # Car detail + price breakdown
-│   │   │   ├── BookingPage.java               # Checkout form + order summary
-│   │   │   ├── ConfirmationPage.java          # Booking success page
-│   │   │   ├── LoginPage.java                 # Authentication
-│   │   │   └── RegisterPage.java              # New account registration
+│   │   │   ├── BasePage.java               # Parent page: Selenium utilities + explicit waits
+│   │   │   ├── HomePage.java               # Landing page + city search
+│   │   │   ├── LoginOtpPage.java           # OTP login flow
+│   │   │   ├── RegisterPage.java           # New user registration
+│   │   │   ├── ProductsPage.java           # Product listing + add to cart
+│   │   │   ├── CartPage.java               # Cart: dates, times, submit
+│   │   │   ├── CompleteOrderPage.java      # Identity number + end order
+│   │   │   ├── OrderConfirmationPage.java  # Terms modal + order complete
+│   │   │   ├── OrdersPage.java             # Orders list + menu options
+│   │   │   ├── OrderSummaryPage.java       # Tax & total price validation
+│   │   │   └── EditOrderPage.java          # Edit & cancel order flows
 │   │   │
 │   │   └── utils/
-│   │       ├── DatePickerUtil.java            # Calendar widget: month navigation + day click
-│   │       ├── PriceParser.java               # Parses "EGP 1,250.50" → BigDecimal
-│   │       ├── ScreenshotUtil.java            # Captures PNG/Base64 screenshots
-│   │       └── WaitUtil.java                  # Static explicit-wait factory methods
+│   │       ├── ScreenshotUtil.java         # PNG screenshots (PASSED/FAILED prefix)
+│   │       └── WaitUtil.java               # Explicit wait helpers
 │   │
 │   └── test/
 │       ├── java/com/finalrental/
 │       │   ├── tests/
-│       │   │   ├── BaseTest.java              # @BeforeMethod / @AfterMethod (driver + screenshot)
-│       │   │   ├── HomePageTest.java          # UI load + search form tests
-│       │   │   ├── SearchResultsTest.java     # Filters, sorting, card validation
-│       │   │   ├── DatePickerTest.java        # Date picker interactions + cross-month
-│       │   │   ├── PricingCalculationTest.java# ★ Subtotal / Tax / Total accuracy (critical)
-│       │   │   ├── BookingFlowTest.java       # Full E2E booking journey
-│       │   │   └── LoginTest.java             # Auth: valid + invalid credentials
+│       │   │   ├── BaseTest.java           # @BeforeMethod / @AfterMethod
+│       │   │   ├── RegisterTest.java       # Register new user
+│       │   │   ├── LoginOtpTest.java       # OTP login
+│       │   │   ├── OrderFlowTest.java      # Full order flow + price validation
+│       │   │   ├── EditOrderTest.java      # Edit order
+│       │   │   └── CancelOrderTest.java    # Cancel order
 │       │   │
-│       │   ├── listeners/
-│       │   │   └── ExtentReportListener.java  # TestNG listener → HTML Extent Report
+│       │   ├── bdd/
+│       │   │   ├── runner/
+│       │   │   │   └── CucumberRunner.java
+│       │   │   └── stepdefs/
+│       │   │       ├── Hooks.java
+│       │   │       ├── RegisterSteps.java
+│       │   │       ├── LoginSteps.java
+│       │   │       ├── OrderSteps.java
+│       │   │       ├── EditOrderSteps.java
+│       │   │       └── CancelOrderSteps.java
 │       │   │
-│       │   └── data/
-│       │       └── TestDataProvider.java      # Centralised Faker + JSON data loader
+│       │   ├── data/
+│       │   │   └── TestContext.java        # Shared state between tests (registered phone)
+│       │   │
+│       │   └── listeners/
+│       │       └── ExtentReportListener.java
 │       │
 │       └── resources/
-│           ├── config.properties              # All framework settings
-│           ├── log4j2.xml                     # Logging configuration
-│           ├── testng.xml                     # Full suite
-│           ├── testng-smoke.xml               # Smoke suite
-│           ├── testng-regression.xml          # Regression suite (parallel)
-│           └── testdata/
-│               └── users.json                 # Static user credentials
+│           ├── config.properties
+│           ├── log4j2.xml
+│           ├── testng.xml
+│           └── features/
+│               ├── 01_register.feature
+│               ├── 02_login.feature
+│               ├── 03_order.feature
+│               ├── 04_edit_order.feature
+│               └── 05_cancel_order.feature
+```
+
+---
+
+## Test Scenarios
+
+### TestNG Suite (testng.xml)
+| Test Class | Description |
+|---|---|
+| `RegisterTest` | Register new user with random Egyptian phone number |
+| `LoginOtpTest` | OTP login with registered phone |
+| `OrderFlowTest` | Full order flow + tax/total price validation |
+| `EditOrderTest` | Edit existing order by adding a product |
+| `CancelOrderTest` | Cancel order with reason |
+
+### Cucumber BDD (CucumberRunner)
+| Feature File | Description |
+|---|---|
+| `01_register.feature` | Register new user |
+| `02_login.feature` | OTP login with registered phone |
+| `03_order.feature` | Full order flow + price validation |
+| `04_edit_order.feature` | Edit order |
+| `05_cancel_order.feature` | Cancel order |
+
+---
+
+## Key Technical Solutions
+
+### Bootstrap Selectpicker
+Standard Selenium `select` fails because selectpicker hides the native `<select>`. Solution: JavaScript to set value and dispatch change event.
+```java
+executeScript("var el = document.querySelector('#city_select'); el.value = '6'; el.dispatchEvent(new Event('change', {bubbles: true}));");
+```
+
+### Flatpickr Date Inputs
+```java
+executeScript("document.querySelector('#from_date')._flatpickr.setDate(arguments[0], true);", date);
+```
+
+### Discount Modal Blocking Clicks
+```java
+executeScript("document.querySelectorAll('.modal').forEach(m => { m.classList.remove('show'); m.style.display = 'none'; }); document.querySelectorAll('.modal-backdrop').forEach(b => b.remove()); document.body.classList.remove('modal-open');");
+```
+
+### Shared Test State (TestContext)
+Registered phone number is saved in `TestContext` and reused across Login, Order, Edit, and Cancel tests:
+```java
+TestContext.setRegisteredPhone(phone); // in Register
+TestContext.getRegisteredPhone();       // in Login, Order, etc.
+```
+
+### Price Validation (BigDecimal)
+```java
+BigDecimal expectedTax = rental.add(delivery).subtract(discount)
+    .multiply(new BigDecimal("0.15"))
+    .setScale(2, RoundingMode.HALF_UP);
+assertThat(actualTax).isEqualByComparingTo(expectedTax);
 ```
 
 ---
@@ -86,124 +156,78 @@ final-rental-framework/
 ## Quick Start
 
 ### Prerequisites
-- **Java 21 LTS** (Java 24+ causes `ExceptionInInitializerError` with the Selenium/TestNG versions pinned here — use 21)
+- Java 21 LTS (Adoptium recommended)
 - Maven 3.8+
-- Chrome / Firefox / Edge installed (drivers are managed automatically)
+- Google Chrome (latest)
 
-> ⚠️ **Before running any tests:** open `src/test/resources/config.properties` and replace
-> `base.url` with the real Final Rental website URL. The shipped placeholder
-> (`https://www.finalrental.com`) does not resolve, and tests will fail with
-> `ERR_NAME_NOT_RESOLVED` until it's updated.
-
-### 1. Clone & Build
+### 1. Clone
 ```bash
-git clone <repo-url>
-cd final-rental-framework
-mvn clean compile
+git clone https://github.com/OmarEl-Antary/final-rental-framework-updated.git
+cd final-rental-framework-updated
 ```
 
-### 2. Run All Tests
+### 2. Run TestNG Suite
 ```bash
 mvn test
 ```
 
-### 3. Run Smoke Suite Only
+### 3. Run Cucumber BDD
 ```bash
-mvn test -Psmoke
+mvn test -Dtest=CucumberRunner
 ```
 
-### 4. Run Regression Suite (parallel)
+### 4. Run Single Test Class
 ```bash
-mvn test -Pregression
+mvn test -Dtest=OrderFlowTest
 ```
 
-### 5. Override Browser / Environment
+### 5. Headless Mode
 ```bash
-# Firefox + staging environment
-mvn test -Dbrowser=firefox -Denv=staging -Dbase.url=https://staging.finalrental.com
-
-# Chrome headless CI mode
 mvn test -Dheadless=true
-
-# Edge browser
-mvn test -Dbrowser=edge
 ```
 
 ---
 
-## Key Design Decisions
-
-### 1. No Thread.sleep – Ever
-All synchronisation is done with `WebDriverWait` + `ExpectedConditions`. The `BasePage` class provides typed wait helpers (`waitForVisible`, `waitForClickable`, `waitForInvisible`, etc.) that every page object reuses.
-
-### 2. Thread-Safe Parallel Execution
-`DriverFactory` uses a `ThreadLocal<WebDriver>` so each TestNG thread gets its own browser instance. The `testng-regression.xml` suite runs at `parallel="classes"` with 4 threads.
-
-### 3. Rental Business Logic in a Dedicated Model
-`RentalCalculator` encapsulates the pricing domain:
-```java
-subtotal = dailyRate × rentalDays
-tax      = subtotal × (taxRate / 100)   // default 14% VAT
-total    = subtotal + tax
-```
-`PricingCalculationTest` uses this model to assert UI-displayed prices are mathematically correct, using `BigDecimal` throughout to avoid floating-point drift.
-
-### 4. DatePickerUtil – Dynamic Calendar Navigation
-Handles any month-navigation picker:
-- Navigates forward/backward until the target month/year is in the header
-- Falls back to typing dates directly into text inputs for non-calendar pickers
-- Supports range pickers (check-in → check-out without re-opening)
-
-### 5. PriceParser – Locale-Aware Currency Parsing
-Strips `EGP`, `LE`, `$`, whitespace, and thousands separators, returning a `BigDecimal` for exact numeric comparison.
-
----
-
-## Configuration Reference (`config.properties`)
+## Configuration (`config.properties`)
 
 | Key | Default | Description |
 |---|---|---|
-| `base.url` | `https://www.finalrental.com` | Website URL |
-| `browser` | `chrome` | `chrome` / `firefox` / `edge` |
-| `headless` | `false` | Run browser in headless mode |
-| `explicit.wait` | `15` | Seconds for explicit waits |
-| `page.load.timeout` | `30` | Max page load time (seconds) |
-| `screenshot.on.failure` | `true` | Auto-capture on test failure |
-| `rental.tax.rate` | `14.0` | VAT % for pricing assertions |
-| `rental.date.format` | `MM/dd/yyyy` | Date picker input format |
-| `rental.min.days` | `1` | Minimum allowed rental period |
+| `base.url` | `https://testing.final.sa` | Website URL |
+| `browser` | `chrome` | Browser type |
+| `headless` | `false` | Headless mode |
+| `explicit.wait` | `15` | Explicit wait (seconds) |
+| `page.load.timeout` | `60` | Page load timeout |
+| `screenshot.on.failure` | `true` | Screenshot on failure |
 
 ---
 
-## Reports & Logs
+## Reports & Artifacts
 
 | Artifact | Location |
 |---|---|
 | Extent HTML Report | `test-output/ExtentReport.html` |
-| Screenshots | `src/test/resources/screenshots/` |
+| Screenshots (PASSED) | `src/test/resources/screenshots/PASSED_*.png` |
+| Screenshots (FAILED) | `src/test/resources/screenshots/FAILED_*.png` |
+| Cucumber HTML Report | `target/cucumber-reports/cucumber.html` |
 | Log file | `logs/automation.log` |
 
 ---
 
 ## Adding New Tests
 
-1. Create your Page Object in `src/main/java/com/finalrental/pages/` extending `BasePage`.
-2. Add `@FindBy` fields and interaction methods (no raw `driver.findElement` in tests).
-3. Create your test class in `src/test/java/com/finalrental/tests/` extending `BaseTest`.
-4. Annotate tests with `@Test(groups={"smoke"})` or `groups={"regression"}`.
-5. Add the class to the relevant `testng-*.xml` suite file.
+### TestNG
+1. Create Page Object in `src/main/java/com/finalrental/pages/` extending `BasePage`
+2. Create test class in `src/test/java/com/finalrental/tests/` extending `BaseTest`
+3. Add class to `testng.xml`
+
+### Cucumber BDD
+1. Create Page Object (same as above)
+2. Create `.feature` file in `src/test/resources/features/`
+3. Create Step Definitions in `src/test/java/com/finalrental/bdd/stepdefs/`
 
 ---
 
-## CI/CD Integration (GitHub Actions example)
+## Author
 
-```yaml
-- name: Run Smoke Tests
-  run: mvn test -Psmoke -Dheadless=true -Dbrowser=chrome
-
-- name: Upload Report
-  uses: actions/upload-artifact@v3
-  with:
-    name: extent-report
-    path: test-output/ExtentReport.html
-```
+**Omar El-Antary**
+GitHub: [@OmarEl-Antary](https://github.com/OmarEl-Antary)

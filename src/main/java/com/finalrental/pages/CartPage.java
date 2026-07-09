@@ -35,6 +35,7 @@ public class CartPage extends BasePage {
                         "//div[contains(@class,'from-time')]" +
                                 "//span[@class='text' and contains(text(),'" + timeValue + "')]"));
         jsClick(option);
+        executeScript("document.body.click();");
         log.info("Pickup time selected.");
         return this;
     }
@@ -45,13 +46,9 @@ public class CartPage extends BasePage {
                 "document.querySelector('#to_date')._flatpickr.setDate(arguments[0], true);",
                 date
         );
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.cssSelector("#to-time option:not([hidden])")));
-            log.info("To-time options loaded.");
-        } catch (Exception e) {
-            log.debug("to-time wait: {}", e.getMessage());
-        }
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.cssSelector("#to-time option:not([hidden])")));
+        log.info("To-time options loaded.");
         return this;
     }
 
@@ -65,21 +62,22 @@ public class CartPage extends BasePage {
                         "//div[contains(@class,'to-time')]" +
                                 "//span[@class='text' and contains(text(),'" + timeValue + "')]"));
         jsClick(option);
+        executeScript("document.body.click();");
         log.info("Return time selected.");
         return this;
     }
 
-    public OrderConfirmationPage clickSubmitCart() {
+    public CompleteOrderPage clickSubmitCart() {
         log.info("Submitting cart via submitCartDates()");
         executeScript("submitCartDates();");
         try {
             wait.until(ExpectedConditions.not(
-                    ExpectedConditions.urlContains("/cart")));
-            log.info("Navigated away from cart. URL: {}", driver.getCurrentUrl());
+                    ExpectedConditions.urlToBe("https://testing.final.sa/cart")));
+            log.info("Navigated to: {}", driver.getCurrentUrl());
         } catch (Exception e) {
-            log.warn("URL did not change from /cart: {}", e.getMessage());
+            log.warn("URL did not change: {}", e.getMessage());
         }
-        return new OrderConfirmationPage();
+        return new CompleteOrderPage();
     }
 
     public boolean isCartPageLoaded() {

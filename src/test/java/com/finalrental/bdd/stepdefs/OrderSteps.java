@@ -1,5 +1,6 @@
 package com.finalrental.bdd.stepdefs;
 
+import com.finalrental.data.TestContext;
 import com.finalrental.pages.*;
 import io.cucumber.java.en.*;
 import org.testng.Assert;
@@ -8,6 +9,7 @@ public class OrderSteps {
 
     private ProductsPage productsPage;
     private CartPage cartPage;
+    private CompleteOrderPage completePage;
     private OrderConfirmationPage confirmPage;
     private OrdersPage ordersPage;
     private OrderSummaryPage summaryPage;
@@ -18,7 +20,7 @@ public class OrderSteps {
         LoginOtpPage loginOtpPage = new LoginOtpPage().dismissBanner();
         loginOtpPage.clickLoginButton()
                 .selectCountryCodeByText("+20")
-                .enterPhoneNumber(phone)
+                .enterPhoneNumber(TestContext.getRegisteredPhone())
                 .clickSendOtp()
                 .enterOtp(otp)
                 .clickVerify();
@@ -80,7 +82,17 @@ public class OrderSteps {
 
     @And("submits the cart")
     public void submits_the_cart() {
-        confirmPage = cartPage.clickSubmitCart();
+        completePage = cartPage.clickSubmitCart();
+    }
+
+    @And("the user enters identity number")
+    public void the_user_enters_identity_number() {
+        completePage.enterIdentityNumber(TestContext.generateIdentityNumber());
+    }
+
+    @And("the user confirms the complete order")
+    public void the_user_confirms_the_complete_order() {
+        confirmPage = completePage.clickSubmitOrder();
     }
 
     @Then("the order confirmation page should be loaded")

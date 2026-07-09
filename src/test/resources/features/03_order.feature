@@ -17,16 +17,13 @@ Feature: Full Order Flow
     When the user navigates to cart page
     Then the cart page should be loaded
 
-    When the user selects pickup date "2026-07-08"
+    When the user selects pickup date "2026-07-11"
     And selects pickup time "7:00"
-    And selects return date "2026-07-11"
+    And selects return date "2026-07-15"
     And selects return time "7:00"
     And submits the cart
-
-    Then the order confirmation page should be loaded
-
-    When the user clicks end order button
-    Then the terms modal should appear
+    And the user enters identity number
+    And the user confirms the complete order
 
     When the user agrees to terms
     Then the order completed modal should appear

@@ -7,6 +7,12 @@
         <listener class-name="com.finalrental.listeners.ExtentReportListener"/>
     </listeners>
 
+    <test name="Register Tests">
+        <classes>
+            <class name="com.finalrental.tests.RegisterTest"/>
+        </classes>
+    </test>
+
     <test name="Login OTP Tests">
         <classes>
             <class name="com.finalrental.tests.LoginOtpTest"/>
@@ -16,6 +22,18 @@
     <test name="Order Flow Tests">
         <classes>
             <class name="com.finalrental.tests.OrderFlowTest"/>
+        </classes>
+    </test>
+
+    <test name="Edit Order Tests">
+        <classes>
+            <class name="com.finalrental.tests.EditOrderTest"/>
+        </classes>
+    </test>
+
+    <test name="Cancel Order Tests">
+        <classes>
+            <class name="com.finalrental.tests.CancelOrderTest"/>
         </classes>
     </test>
 

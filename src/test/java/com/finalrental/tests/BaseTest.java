@@ -12,25 +12,10 @@ import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
 
-/**
- * BaseTest – the parent class for every test class in the framework.
- *
- * <p>Responsibilities:
- * <ul>
- *   <li>{@code @BeforeSuite} – log suite start and config summary</li>
- *   <li>{@code @BeforeMethod} – initialise a fresh WebDriver per test</li>
- *   <li>{@code @AfterMethod} – capture screenshot on failure, quit driver</li>
- * </ul>
- *
- * <p>Thread-safe via {@link DriverFactory}'s {@code ThreadLocal} design,
- * allowing TestNG parallel execution at the method level.
- */
 public abstract class BaseTest {
 
     protected final Logger log = LogManager.getLogger(getClass());
     protected final ConfigReader config = ConfigReader.getInstance();
-
-    // ── Suite Setup ──────────────────────────────────────────────────────────
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
@@ -43,15 +28,11 @@ public abstract class BaseTest {
         log.info("========================================================");
     }
 
-    // ── Per-Test Setup ───────────────────────────────────────────────────────
-
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
         log.info("▶ Starting test: {}.{}", getClass().getSimpleName(), method.getName());
         DriverFactory.initDriver();
     }
-
-    // ── Per-Test Teardown ────────────────────────────────────────────────────
 
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result, Method method) {
@@ -60,15 +41,23 @@ public abstract class BaseTest {
         switch (result.getStatus()) {
             case ITestResult.FAILURE -> {
                 log.error("✗ FAILED: {}", testName);
-                if (config.isScreenshotOnFailure()) {
-                    String screenshotPath = ScreenshotUtil.capture(testName);
-                    if (screenshotPath != null) {
-                        log.info("  Screenshot: {}", screenshotPath);
-                    }
+                // screenshot بيبدأ بـ FAILED
+                String screenshotPath = ScreenshotUtil.capture("FAILED_" + testName);
+                if (screenshotPath != null) {
+                    log.info("  Screenshot: {}", screenshotPath);
                 }
             }
-            case ITestResult.SKIP -> log.warn("⚠ SKIPPED: {}", testName);
-            default              -> log.info("✔ PASSED: {}", testName);
+            case ITestResult.SKIP -> {
+                log.warn("⚠ SKIPPED: {}", testName);
+            }
+            default -> {
+                log.info("✔ PASSED: {}", testName);
+                // screenshot بيبدأ بـ PASSED
+                String screenshotPath = ScreenshotUtil.capture("PASSED_" + testName);
+                if (screenshotPath != null) {
+                    log.info("  Screenshot: {}", screenshotPath);
+                }
+            }
         }
 
         DriverFactory.quitDriver();

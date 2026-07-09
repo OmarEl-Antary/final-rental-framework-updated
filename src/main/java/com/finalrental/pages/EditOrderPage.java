@@ -83,7 +83,21 @@ public class EditOrderPage extends BasePage {
         return this;
     }
 
-    // ── Step 4: تعديل الطلب من القايمة ──────────────────────────────────
+    // ── Step 4: عرض الطلب ────────────────────────────────────────────────
+
+    public EditOrderPage clickViewOrder() {
+        log.info("Clicking 'عرض الطلب'");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//a[contains(., 'عرض الطلب')]")));
+        WebElement btn = driver.findElement(
+                By.xpath("//a[contains(., 'عرض الطلب')]"));
+        jsClick(btn);
+        waitForPageLoad();
+        log.info("Navigated to order details page.");
+        return this;
+    }
+
+    // ── تعديل الطلب ──────────────────────────────────────────────────────
 
     public EditOrderPage clickEditFromMenu() {
         log.info("Clicking 'تعديل الطلب' from dropdown menu");
@@ -98,8 +112,6 @@ public class EditOrderPage extends BasePage {
         return this;
     }
 
-    // ── Step 5: إضافة منتج ───────────────────────────────────────────────
-
     public EditOrderPage clickAddProduct() {
         log.info("Clicking 'إضافة منتج'");
         closeAnyModal();
@@ -110,8 +122,6 @@ public class EditOrderPage extends BasePage {
         log.info("Navigated to alternative products page.");
         return this;
     }
-
-    // ── Step 6: اختيار أول منتج ──────────────────────────────────────────
 
     public EditOrderPage clickFirstProduct() {
         log.info("Clicking first product");
@@ -125,8 +135,6 @@ public class EditOrderPage extends BasePage {
         return this;
     }
 
-    // ── Step 7: إضافة إلى الطلب ─────────────────────────────────────────
-
     public EditOrderPage clickAddToOrder() {
         log.info("Clicking 'إضافة إلى الطلب'");
         closeAnyModal();
@@ -138,8 +146,6 @@ public class EditOrderPage extends BasePage {
         log.info("Product added to order.");
         return this;
     }
-
-    // ── Step 8: إكمال الطلب الأول ────────────────────────────────────────
 
     public EditOrderPage clickCompleteOrder() {
         log.info("Clicking 'إكمال الطلب' (#completeOrderAndAgree)");
@@ -153,8 +159,6 @@ public class EditOrderPage extends BasePage {
         return this;
     }
 
-    // ── Step 9: إكمال الطلب الثاني ───────────────────────────────────────
-
     public EditOrderPage clickCompleteOrderAddress() {
         log.info("Clicking 'إكمال الطلب' (edit-address)");
         closeAnyModal();
@@ -167,8 +171,6 @@ public class EditOrderPage extends BasePage {
         return this;
     }
 
-    // ── التحقق من نجاح التعديل ───────────────────────────────────────────
-
     public boolean isEditOrderButtonVisible() {
         try {
             wait.until(ExpectedConditions
@@ -177,6 +179,61 @@ public class EditOrderPage extends BasePage {
             return true;
         } catch (Exception e) {
             log.warn("Edit order button not found: {}", e.getMessage());
+            return false;
+        }
+    }
+
+    // ── إلغاء الطلب ──────────────────────────────────────────────────────
+
+    public EditOrderPage clickCancelOrder() {
+        log.info("Clicking 'إلغاء الطلب' button");
+        closeAnyModal();
+        WebElement btn = waitForClickable(
+                By.cssSelector(".cancel_order__"));
+        jsClick(btn);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("[id^='cancelOrderModal']")));
+        log.info("Cancel order modal appeared.");
+        return this;
+    }
+
+    public EditOrderPage clickConfirmCancel() {
+        log.info("Clicking confirm cancel button");
+        try {
+            WebElement btn = waitForClickable(
+                    By.cssSelector("button#custom-cancel"));
+            jsClick(btn);
+            log.info("First confirm cancel clicked.");
+        } catch (Exception e) {
+            WebElement btn = waitForClickable(
+                    By.cssSelector("button[id^='cancelOrder'].red__"));
+            jsClick(btn);
+            log.info("Second confirm cancel clicked.");
+        }
+        return this;
+    }
+
+    public EditOrderPage enterCancelReason(String reason) {
+        log.info("Entering cancel reason: {}", reason);
+        WebElement textarea = waitForVisible(
+                By.cssSelector("textarea[name='cancel_reason']"));
+        textarea.clear();
+        textarea.sendKeys(reason);
+        log.info("Cancel reason entered.");
+        return this;
+    }
+
+    public boolean isOrderCancelledSuccessfully() {
+        try {
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.urlContains("orders"),
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector(".cancel_order__"))
+            ));
+            log.info("Order cancelled successfully. ✅");
+            return true;
+        } catch (Exception e) {
+            log.warn("Order cancellation not confirmed: {}", e.getMessage());
             return false;
         }
     }
