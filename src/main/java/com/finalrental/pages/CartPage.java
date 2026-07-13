@@ -68,11 +68,23 @@ public class CartPage extends BasePage {
     }
 
     public CompleteOrderPage clickSubmitCart() {
-        log.info("Submitting cart via submitCartDates()");
-        executeScript("submitCartDates();");
+        log.info("Submitting cart");
+        // اسكرول للأسفل
+        executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        try { Thread.sleep(1000); } catch (Exception ignored) {}
+
+        // اضغط على الزرار مباشرة
+        WebElement btn = waitForClickable(
+                By.cssSelector("a[onclick='submitCartDates()']"));
+        scrollIntoView(btn);
+        jsClick(btn);
+
         try {
-            wait.until(ExpectedConditions.not(
-                    ExpectedConditions.urlToBe("https://testing.final.sa/cart")));
+            new org.openqa.selenium.support.ui.WebDriverWait(
+                    driver, java.time.Duration.ofSeconds(60))
+                    .until(org.openqa.selenium.support.ui.ExpectedConditions.not(
+                            org.openqa.selenium.support.ui.ExpectedConditions
+                                    .urlToBe("https://testing.final.sa/cart")));
             log.info("Navigated to: {}", driver.getCurrentUrl());
         } catch (Exception e) {
             log.warn("URL did not change: {}", e.getMessage());

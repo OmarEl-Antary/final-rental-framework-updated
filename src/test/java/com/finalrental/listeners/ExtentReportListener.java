@@ -2,112 +2,176 @@ package com.finalrental.listeners;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.finalrental.config.ConfigReader;
 import com.finalrental.utils.ScreenshotUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.commons.io.FileUtils;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-/**
- * ExtentReportListener – TestNG {@link ITestListener} that builds a rich
- * HTML report using Extent Reports (Spark reporter).
- *
- * <p>The report is flushed to disk in {@link #onFinish(ITestContext)}.
- * Add this listener to {@code testng.xml}:
- * <pre>
- *   &lt;listeners&gt;
- *     &lt;listener class-name="com.finalrental.listeners.ExtentReportListener"/&gt;
- *   &lt;/listeners&gt;
- * </pre>
- */
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ExtentReportListener implements ITestListener {
 
-    private static final Logger log = LogManager.getLogger(ExtentReportListener.class);
-    private static final ConfigReader CONFIG = ConfigReader.getInstance();
-
-    /** One report instance shared across all threads. */
     private static ExtentReports extent;
+    private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    private static final String BASE_PATH = "test-output/reports/";
+    private static final DateTimeFormatter FMT =
+            DateTimeFormatter.ofPattern("dd-MM-yyyy_hh-mm-a");
 
-    /** Thread-local ExtentTest so parallel tests don't cross-contaminate. */
-    private static final ThreadLocal<ExtentTest> TEST_NODE = new ThreadLocal<>();
+    private void createDirectories(String path) {
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
 
-    // ── ITestListener callbacks ───────────────────────────────────────────────
+    private String copyScreenshotToReportDir(String screenshotPath, String reportDir) {
+        if (screenshotPath == null) return null;
+        try {
+            File src  = new File(screenshotPath);
+            File dest = new File(reportDir + src.getName());
+            FileUtils.copyFile(src, dest);
+            return src.getName(); // relative path
+        } catch (Exception e) {
+            return screenshotPath;
+        }
+    }
 
     @Override
     public void onStart(ITestContext context) {
-        log.info("Initialising Extent Reports...");
-
-        ExtentSparkReporter spark = new ExtentSparkReporter(CONFIG.getExtentReportPath());
-        spark.config().setDocumentTitle(CONFIG.getExtentReportTitle());
-        spark.config().setReportName(CONFIG.getExtentReportName());
-        spark.config().setTheme(Theme.DARK);
-        spark.config().setEncoding("utf-8");
+        createDirectories(BASE_PATH + "PASSED/");
+        createDirectories(BASE_PATH + "FAILED/");
 
         extent = new ExtentReports();
-        extent.attachReporter(spark);
-        extent.setSystemInfo("Environment", CONFIG.getEnvironment());
-        extent.setSystemInfo("Base URL",    CONFIG.getBaseUrl());
-        extent.setSystemInfo("Browser",     CONFIG.getBrowser());
-        extent.setSystemInfo("Headless",    String.valueOf(CONFIG.isHeadless()));
-        extent.setSystemInfo("Suite",       context.getSuite().getName());
-    }
-
-    @Override
-    public void onTestStart(ITestResult result) {
-        String testName = result.getMethod().getMethodName();
-        String description = result.getMethod().getDescription();
-        String[] groups = result.getMethod().getGroups();
-
-        ExtentTest test = extent.createTest(testName, description);
-        for (String group : groups) {
-            test.assignCategory(group);
-        }
-        TEST_NODE.set(test);
-        log.debug("Extent test started: {}", testName);
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        TEST_NODE.get().log(Status.PASS, "Test passed.");
-    }
-
-    @Override
-    public void onTestFailure(ITestResult result) {
-        ExtentTest test = TEST_NODE.get();
-        test.log(Status.FAIL, "Test failed: " + result.getThrowable().getMessage());
-
-        // Attach screenshot
-        String base64Screenshot = ScreenshotUtil.captureAsBase64();
-        if (!base64Screenshot.isEmpty()) {
-            try {
-                test.addScreenCaptureFromBase64String(base64Screenshot, "Failure Screenshot");
-            } catch (Exception e) {
-                log.warn("Could not attach screenshot to report: {}", e.getMessage());
-            }
-        }
-
-        // Log the full stack trace
-        test.log(Status.FAIL, result.getThrowable());
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        TEST_NODE.get().log(Status.SKIP,
-                "Test skipped: " + (result.getThrowable() != null
-                        ? result.getThrowable().getMessage() : "No reason given."));
+        extent.setSystemInfo("Project",     "Final Rental E2E Framework");
+        extent.setSystemInfo("Environment", "Testing");
+        extent.setSystemInfo("Base URL",    "https://testing.final.sa");
+        extent.setSystemInfo("Browser",     "Chrome");
+        extent.setSystemInfo("Java",        System.getProperty("java.version"));
+        extent.setSystemInfo("OS",          System.getProperty("os.name"));
+        extent.setSystemInfo("Executed By", System.getProperty("user.name"));
+        extent.setSystemInfo("Executed At",
+                LocalDateTime.now().format(
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a")));
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        if (extent != null) {
-            extent.flush();
-            log.info("Extent Report written to: {}", CONFIG.getExtentReportPath());
+        if (extent != null) extent.flush();
+    }
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        String testName    = result.getMethod().getMethodName();
+        String className   = result.getTestClass().getName()
+                .replace("com.finalrental.tests.", "");
+        String description = result.getMethod().getDescription();
+
+        ExtentTest extentTest = extent.createTest(
+                "<b>" + className + "</b> → " + testName,
+                description != null ? description : ""
+        );
+
+        for (String group : result.getMethod().getGroups()) {
+            extentTest.assignCategory(group);
         }
-        TEST_NODE.remove();
+
+        test.set(extentTest);
+        test.get().info("Test Started: " + testName);
+    }
+
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        String className  = result.getTestClass().getName()
+                .replace("com.finalrental.tests.", "");
+        String timestamp  = LocalDateTime.now().format(FMT);
+        String reportDir  = BASE_PATH + "PASSED/";
+        String reportPath = reportDir + "PASSED-" + className + "-" + timestamp + ".html";
+
+        createDirectories(reportDir);
+
+        ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
+        spark.config().setTheme(Theme.DARK);
+        spark.config().setDocumentTitle("PASSED - " + className);
+        spark.config().setReportName("✅ " + className);
+        extent.attachReporter(spark);
+
+        String screenshotPath = ScreenshotUtil.capture(
+                "PASSED_" + result.getMethod().getMethodName());
+        String relativePath = copyScreenshotToReportDir(screenshotPath, reportDir);
+
+        test.get().pass("✅ Test PASSED");
+
+        if (relativePath != null) {
+            try {
+                test.get().pass("Screenshot",
+                        MediaEntityBuilder.createScreenCaptureFromPath(relativePath).build());
+            } catch (Exception e) {
+                test.get().info("Screenshot: " + relativePath);
+            }
+        }
+
+        extent.flush();
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        String className  = result.getTestClass().getName()
+                .replace("com.finalrental.tests.", "");
+        String timestamp  = LocalDateTime.now().format(FMT);
+        String reportDir  = BASE_PATH + "FAILED/";
+
+        String failedStep = "UnknownStep";
+        if (result.getThrowable() != null && result.getThrowable().getMessage() != null) {
+            failedStep = result.getThrowable().getMessage()
+                    .replaceAll("[^a-zA-Z0-9\u0600-\u06FF_]", "_");
+            if (failedStep.length() > 50) failedStep = failedStep.substring(0, 50);
+        }
+
+        String reportPath = reportDir + "FAILED-" + className + "-" + timestamp
+                + "-" + failedStep + ".html";
+
+        createDirectories(reportDir);
+
+        ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
+        spark.config().setTheme(Theme.DARK);
+        spark.config().setDocumentTitle("FAILED - " + className);
+        spark.config().setReportName("❌ " + className);
+        extent.attachReporter(spark);
+
+        test.get().fail("❌ Test FAILED");
+        test.get().fail(result.getThrowable());
+
+        String screenshotPath = ScreenshotUtil.capture(
+                "FAILED_" + result.getMethod().getMethodName());
+        String relativePath = copyScreenshotToReportDir(screenshotPath, reportDir);
+
+        if (relativePath != null) {
+            try {
+                test.get().fail("Screenshot at failure",
+                        MediaEntityBuilder.createScreenCaptureFromPath(relativePath).build());
+            } catch (Exception e) {
+                test.get().info("Screenshot: " + relativePath);
+            }
+        }
+
+        extent.flush();
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        test.get().skip("⚠️ Test SKIPPED");
+        if (result.getThrowable() != null) {
+            test.get().skip(result.getThrowable());
+        }
+    }
+
+    public static ExtentTest getTest() {
+        return test.get();
     }
 }

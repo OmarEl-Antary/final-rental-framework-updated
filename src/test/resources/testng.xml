@@ -5,6 +5,7 @@
 
     <listeners>
         <listener class-name="com.finalrental.listeners.ExtentReportListener"/>
+        <listener class-name="com.finalrental.listeners.RetryListener"/>
     </listeners>
 
     <test name="Register Tests">
@@ -34,6 +35,12 @@
     <test name="Cancel Order Tests">
         <classes>
             <class name="com.finalrental.tests.CancelOrderTest"/>
+        </classes>
+    </test>
+
+    <test name="Address Tests">
+        <classes>
+            <class name="com.finalrental.tests.AddressTest"/>
         </classes>
     </test>
 

@@ -13,128 +13,78 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
-/**
- * DriverFactory – creates and stores one {@link WebDriver} per thread,
- * enabling safe parallel test execution with TestNG.
- *
- * <p>Usage:
- * <pre>
- *   DriverFactory.initDriver();          // in @BeforeMethod
- *   WebDriver driver = DriverFactory.getDriver();
- *   DriverFactory.quitDriver();          // in @AfterMethod
- * </pre>
- */
-public final class DriverFactory {
+public class DriverFactory {
 
     private static final Logger log = LogManager.getLogger(DriverFactory.class);
+    private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
-    /** One driver per thread – essential for parallel execution. */
-    private static final ThreadLocal<WebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
+    private DriverFactory() {}
 
-    private DriverFactory() { /* utility class */ }
-
-    // ── Public API ───────────────────────────────────────────────────────────
-
-    /**
-     * Initialises a new WebDriver for the current thread based on
-     * {@link ConfigReader} settings.
-     */
     public static void initDriver() {
-        ConfigReader config = ConfigReader.getInstance();
-        String browser    = config.getBrowser();
-        boolean headless  = config.isHeadless();
+        if (driverThreadLocal.get() != null) return;
+
+        ConfigReader config  = ConfigReader.getInstance();
+        String browser       = config.getBrowser().toLowerCase();
+        boolean headless     = config.isHeadless();
+        int pageLoadTimeout  = config.getPageLoadTimeout();
 
         log.info("Initialising {} driver | headless={}", browser, headless);
 
-        WebDriver driver = switch (browser) {
-            case "chrome" -> createChromeDriver(headless);
-            case "firefox" -> createFirefoxDriver(headless);
-            case "edge"   -> createEdgeDriver(headless);
-            default -> throw new IllegalArgumentException(
-                    "Unsupported browser: '" + browser + "'. Use chrome | firefox | edge.");
-        };
+        WebDriver driver;
 
-        applyTimeouts(driver, config);
+        switch (browser) {
+            case "firefox" -> {
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                if (headless) firefoxOptions.addArguments("--headless");
+                firefoxOptions.addArguments("--disable-notifications");
+                driver = new FirefoxDriver(firefoxOptions);
+            }
+            case "edge" -> {
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions edgeOptions = new EdgeOptions();
+                if (headless) edgeOptions.addArguments("--headless");
+                edgeOptions.addArguments("--disable-notifications");
+                edgeOptions.addArguments("--disable-popup-blocking");
+                driver = new EdgeDriver(edgeOptions);
+            }
+            default -> {
+                // Chrome (default)
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                if (headless) chromeOptions.addArguments("--headless=new");
+                chromeOptions.addArguments("--disable-notifications");
+                chromeOptions.addArguments("--disable-popup-blocking");
+                chromeOptions.addArguments("--start-maximized");
+                chromeOptions.addArguments("--no-sandbox");
+                chromeOptions.addArguments("--disable-dev-shm-usage");
+                driver = new ChromeDriver(chromeOptions);
+            }
+        }
+
         driver.manage().window().maximize();
-        DRIVER_THREAD_LOCAL.set(driver);
+        driver.manage().timeouts()
+                .pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
+
+        driverThreadLocal.set(driver);
         log.info("WebDriver ready: {}", driver.getClass().getSimpleName());
     }
 
-    /**
-     * Returns the WebDriver for the current thread.
-     *
-     * @throws IllegalStateException if {@link #initDriver()} was not called first
-     */
     public static WebDriver getDriver() {
-        WebDriver driver = DRIVER_THREAD_LOCAL.get();
+        WebDriver driver = driverThreadLocal.get();
         if (driver == null) {
             throw new IllegalStateException(
-                    "WebDriver is not initialised for thread: " + Thread.currentThread().getName() +
-                    ". Call DriverFactory.initDriver() in @BeforeMethod.");
+                    "WebDriver not initialised. Call initDriver() first.");
         }
         return driver;
     }
 
-    /**
-     * Quits the driver and removes it from the thread-local store.
-     * Safe to call even if the driver was never initialised.
-     */
     public static void quitDriver() {
-        WebDriver driver = DRIVER_THREAD_LOCAL.get();
+        WebDriver driver = driverThreadLocal.get();
         if (driver != null) {
-            try {
-                driver.quit();
-                log.info("WebDriver quit successfully.");
-            } catch (Exception e) {
-                log.warn("Error while quitting WebDriver: {}", e.getMessage());
-            } finally {
-                DRIVER_THREAD_LOCAL.remove();
-            }
+            driver.quit();
+            driverThreadLocal.remove();
+            log.info("WebDriver quit successfully.");
         }
-    }
-
-    // ── Browser Creators ─────────────────────────────────────────────────────
-
-    private static WebDriver createChromeDriver(boolean headless) {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        if (headless) options.addArguments("--headless=new");
-        options.addArguments(
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-blink-features=AutomationControlled",
-            "--disable-infobars",
-            "--window-size=1920,1080",
-            "--remote-allow-origins=*"
-        );
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-        return new ChromeDriver(options);
-    }
-
-    private static WebDriver createFirefoxDriver(boolean headless) {
-        WebDriverManager.firefoxdriver().setup();
-        FirefoxOptions options = new FirefoxOptions();
-        if (headless) options.addArguments("--headless");
-        options.addArguments("--width=1920", "--height=1080");
-        return new FirefoxDriver(options);
-    }
-
-    private static WebDriver createEdgeDriver(boolean headless) {
-        WebDriverManager.edgedriver().setup();
-        EdgeOptions options = new EdgeOptions();
-        if (headless) options.addArguments("--headless=new");
-        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
-        return new EdgeDriver(options);
-    }
-
-    // ── Timeouts ─────────────────────────────────────────────────────────────
-
-    private static void applyTimeouts(WebDriver driver, ConfigReader config) {
-        driver.manage().timeouts()
-              .implicitlyWait(Duration.ofSeconds(config.getImplicitWait()))
-              .pageLoadTimeout(Duration.ofSeconds(config.getPageLoadTimeout()))
-              .scriptTimeout(Duration.ofSeconds(config.getScriptTimeout()));
     }
 }

@@ -69,6 +69,19 @@ public class OrderSteps {
     public void selects_pickup_time(String time) {
         cartPage.selectFromTime(time);
     }
+    @And("the user selects dynamic pickup date")
+    public void the_user_selects_dynamic_pickup_date() {
+        String date = java.time.LocalDate.now().plusDays(1)
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        cartPage.selectFromDate(date);
+    }
+
+    @And("the user selects dynamic return date")
+    public void the_user_selects_dynamic_return_date() {
+        String date = java.time.LocalDate.now().plusDays(2)
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        cartPage.selectToDate(date);
+    }
 
     @And("selects return date {string}")
     public void selects_return_date(String date) {
